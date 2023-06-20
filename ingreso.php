@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Las credenciales son válidas, el usuario puede iniciar sesión
         // Redirigir al usuario a la página deseada
         //header("Location: dashboard.php");
-        echo "Ingreso Exitoso";
+        header("Location: CATALOGO.html");
         exit();
     } else {
         // Las credenciales son inválidas, mostrar un mensaje de error
