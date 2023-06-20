@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registro - Ángeles de Cuatro Patas</title>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      background-color: #2260b6;
+      color: #000000;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    
+    .container {
+      max-width: 300px;
+      margin: 0 auto;
+      margin-top: 100px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    
+    .form-group label {
+      display: inline-block;
+      width: 120px;
+      margin-right: 10px;
+      color: black;
+    }
+    
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="password"] {
+      width: 180px;
+      padding: 10px;
+      font-size: 16px;
+    }
+    
+    .form-group input[type="submit"] {
+      background-color: #009e0f;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    
+    .form-group input[type="submit"]:hover {
+      background-color: #00850e;
+    }
+    
+    .corner-image {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      width: 100px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <form action="registro.php" method="POST">
+      <div class="form-group">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+      </div>
+      <div class="form-group">
+        <label for="apellidos">Apellidos:</label>
+        <input type="text" id="apellidos" name="apellidos" required>
+      </div>
+      <div class="form-group">
+        <label for="correo">Correo electrónico:</label>
+        <input type="email" id="correo" name="correo" required>
+      </div>
+      <div class="form-group">
+        <label for="fecha-nacimiento">Fecha de nacimiento:</label>
+        <input type="date" id="fecha-nacimiento" name="fecha-nacimiento" required>
+      </div>
+      <div class="form-group">
+        <label for="contrasena">Contraseña:</label>
+        <input type="password" id="contrasena" name="contrasena" required>
+      </div>
+      <div class="form-group">
+        <label for="confirmar-contrasena">Confirmar contraseña:</label>
+        <input type="password" id="confirmar-contrasena" name="confirmar-contrasena" required>
+      </div>
+      <div class="form-group">
+        <input type="submit" value="Registrarse">
+      </div>
+    </form>
+    <a href="login.html"><img src="https://scontent-bog1-1.xx.fbcdn.net/v/t39.30808-6/355294465_1499894990754343_7605562006435203297_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=730e14&_nc_ohc=LYG3186tWmQAX_hGLfg&_nc_ht=scontent-bog1-1.xx&oh=00_AfCgp8lsoxux9hIEovXeR78wIdmYE0VfwaQns--MiCAKmw&oe=64957837" alt="Redireccionar a Login" class="corner-image"></a>
+  </div>
+</body>
+</html>
