@@ -95,6 +95,9 @@
         <input type="submit" value="Registrarse" class="register-button">
       </div>
     </form>
+    <?php if ($error_message !== ''): ?>
+      <p style="color: red;"><?php echo $error_message; ?></p>
+    <?php endif; ?>
   </div>
 </body>
 </html>

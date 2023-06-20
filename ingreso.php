@@ -12,24 +12,30 @@ if ($conn->connect_error) {
     die("Conexión fallida: " . $conn->connect_error);
 }
 
-// Obtener los valores enviados desde el formulario
-$correo = $_POST['correo'];
-$contrasena = $_POST['contrasena'];
+// Inicializar la variable de mensaje de error
+$error_message = '';
 
-// Consulta SQL para verificar el correo y la contraseña en la tabla "registro"
-$sql = "SELECT * FROM registro WHERE correo = '$correo' AND contraseña = '$contrasena'";
-$result = $conn->query($sql);
+// Verificar si se ha enviado el formulario
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Obtener los valores enviados desde el formulario
+    $correo = $_POST['correo'];
+    $contrasena = $_POST['contrasena'];
 
-// Verificar si se encontró un resultado
-if ($result->num_rows == 1) {
-    // Las credenciales son válidas, el usuario puede iniciar sesión
-    // Redirigir al usuario a la página deseada
-    //header("Location: dashboard.php");
-    echo "Ingreso Exitoso";
-    exit();
-} else {
-    // Las credenciales son inválidas, mostrar un mensaje de error
-    echo "Correo o contraseña incorrectos";
+    // Consulta SQL para verificar el correo y la contraseña en la tabla "registro"
+    $sql = "SELECT * FROM registro WHERE correo = '$correo' AND contraseña = '$contrasena'";
+    $result = $conn->query($sql);
+
+    // Verificar si se encontró un resultado
+    if ($result->num_rows == 1) {
+        // Las credenciales son válidas, el usuario puede iniciar sesión
+        // Redirigir al usuario a la página deseada
+        //header("Location: dashboard.php");
+        echo "Ingreso Exitoso";
+        exit();
+    } else {
+        // Las credenciales son inválidas, mostrar un mensaje de error
+        $error_message = "Correo o contraseña incorrectos";
+    }
 }
 
 // Cerrar la conexión
