@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Detalles mascota</title>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      background-color: #2b78e4;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-end;
+      padding: 10px;
+    }
+    .logo {
+      width: 50px;
+    }
+    #container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+    }
+    #database-image {
+      margin-bottom: 20px;
+    }
+    #info-box {
+      background-color: #00ffff;
+      border: 1px solid black;
+      padding: 10px;
+      color: black;
+      text-align: left;
+      margin-bottom: 20px;
+      width: 1200px; /* Ajusta el ancho del cuadro interior según tus necesidades */
+    }
+    #buttons {
+      display: flex;
+      justify-content: space-between;
+    }
+    .button {
+      background-color: #00ffff;
+      color: black;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://scontent-bog1-1.xx.fbcdn.net/v/t39.30808-6/355482673_1500306810713161_975216286150628381_n.jpg?stp=cp0_dst-jpg&_nc_cat=107&ccb=1-7&_nc_sid=730e14&_nc_ohc=sZa0mDQmIw0AX8nijQN&_nc_ht=scontent-bog1-1.xx&oh=00_AfCdR8WrSI5K16RGybRZezE9xHZBC0M9YHCaK43e0TSJ2Q&oe=64967356" alt="Logo 1" width="40">
+    <img src="https://scontent-bog1-1.xx.fbcdn.net/v/t39.30808-6/355304182_1500307210713121_4057495080546077903_n.jpg?stp=cp0_dst-jpg&_nc_cat=105&ccb=1-7&_nc_sid=730e14&_nc_ohc=reaXsRw-X_4AX_Od98p&_nc_ht=scontent-bog1-1.xx&oh=00_AfATAqUyvjzuwltrslRanJKC_FneGBUXV25sXCKZN5-nxA&oe=6497148B" alt="Logo 2" width="50">  
+  </header>
+  <div id="container">
+    <div id="database-image">
+      <!-- Aquí puedes incluir el código o la etiqueta para mostrar la imagen de la base de datos -->
+      <!-- Ejemplo: <img src="database.png" alt="Base de datos"> -->
+    </div>
+    <div id="info-box">
+      <p>Nombre</p>
+      <p>Edad</p>
+      <p>Raza</p>
+      <p>Especie</p>
+      <p>Estado de salud</p>
+      <p>Tamaño</p>
+      <p>Antecedentes</p>
+    </div>
+    <div id="buttons">
+      <button class="button">Apadrinar</button>
+      <button class="button">Adoptar</button>
+    </div>
+  </div>
+</body>
+</html>

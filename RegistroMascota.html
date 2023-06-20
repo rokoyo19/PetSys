@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registro de Mascotas</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            background-color: #2b78e4;
+        }
+
+        .header {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        .form-container {
+            margin-top: 100px;
+            text-align: left;
+            margin-left: auto;
+            margin-right: auto;
+            width: 250px;
+        }
+
+        label {
+            color: white;
+            display: block;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            padding: 5px;
+            width: 250px; /* Aumenta el ancho del campo de entrada */
+            margin-bottom: 10px;
+        }
+
+        button[type="submit"] {
+            background-color: #00f6f8; /* Cambia el color de fondo del botón */
+            color: black; /* Cambia el color del texto del botón */
+            padding: 10px 20px; /* Aumenta el tamaño del botón */
+            border: none;
+            cursor: pointer;
+            font-weight: bold; /* Hace que el texto sea negrita */
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="https://scontent-bog1-1.xx.fbcdn.net/v/t39.30808-6/355482673_1500306810713161_975216286150628381_n.jpg?stp=cp0_dst-jpg&_nc_cat=107&ccb=1-7&_nc_sid=730e14&_nc_ohc=sZa0mDQmIw0AX8nijQN&_nc_ht=scontent-bog1-1.xx&oh=00_AfCdR8WrSI5K16RGybRZezE9xHZBC0M9YHCaK43e0TSJ2Q&oe=64967356" alt="Logo 1" width="40">
+        <img src="https://scontent-bog1-1.xx.fbcdn.net/v/t39.30808-6/355304182_1500307210713121_4057495080546077903_n.jpg?stp=cp0_dst-jpg&_nc_cat=105&ccb=1-7&_nc_sid=730e14&_nc_ohc=reaXsRw-X_4AX_Od98p&_nc_ht=scontent-bog1-1.xx&oh=00_AfATAqUyvjzuwltrslRanJKC_FneGBUXV25sXCKZN5-nxA&oe=6497148B" alt="Logo 2" width="50">
+    </div>
+    <div class="form-container">
+        <form>
+            <div style="text-align: center;">
+                <label for="foto">Foto de la mascota:</label>
+                <input type="file" id="foto" name="foto">
+            </div>
+
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre">
+
+            <label for="edad">Edad:</label>
+            <input type="number" id="edad" name="edad">
+
+            <label for="raza">Raza:</label>
+            <input type="text" id="raza" name="raza">
+
+            <label for="tamaño">Tamaño:</label>
+            <input type="text" id="tamaño" name="tamaño">
+
+            <label for="Estado_de_salud">Estado de salud:</label>
+            <input type="text" id="Estado_de_salud" name="Estado_de_salud">
+
+            <label for="Antecedentes">Antecedentes:</label>
+            <input type="text" id="Antecedentes" name="Antecedentes">
+
+            <label for="especie">Especie:</label>
+            <select id="especie" name="especie">
+                <option value="perro">Perro</option>
+                <option value="gato">Gato</option>
+                <option value="roedor">Roedor</option>
+                <option value="ave">Ave</option>
+            </select>
+
+            <button type="submit">Registrar mascota</button>
+        </form>
+    </div>
+</body>
+</html>
