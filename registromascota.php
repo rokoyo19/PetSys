@@ -20,6 +20,7 @@ $tamaño = $_POST['tamaño'];
 $estado_salud = $_POST['Estado_de_salud'];
 $antecedentes = $_POST['Antecedentes'];
 $especie = $_POST['especie'];
+$estado = 'Despublicado'; // Nuevo atributo con valor por defecto
 
 // Procesar la foto de la mascota (guardar en una ubicación específica)
 $directorio_destino = 'C:\wamp64\www\mascotas\FotosMascotas'; // Ruta donde se guardará la foto
@@ -31,7 +32,7 @@ if (move_uploaded_file($foto_temporal, $foto_destino)) {
     // La foto se subió correctamente, ahora puedes guardar el resto de los datos en la base de datos
 
     // Crear la consulta SQL para insertar los datos en la tabla "mascotas"
-    $consulta = "INSERT INTO mascotas (fotodelamascota, nombre, edad, raza, tamaño, estadosalud, antecedentes, especie) VALUES ('$foto_nombre', '$nombre', $edad, '$raza', '$tamaño', '$estado_salud', '$antecedentes', '$especie')";
+    $consulta = "INSERT INTO mascotas (fotodelamascota, nombre, edad, raza, tamaño, estadosalud, antecedentes, especie, estado) VALUES ('$foto_nombre', '$nombre', $edad, '$raza', '$tamaño', '$estado_salud', '$antecedentes', '$especie', '$estado')";
 
     // Ejecutar la consulta
     if ($conn->query($consulta) === TRUE) {
