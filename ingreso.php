@@ -26,15 +26,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $conn->query($sql);
 
     // Verificar si se encontró un resultado
-    if ($result->num_rows == 1) {
-        // Las credenciales son válidas, el usuario puede iniciar sesión
-        // Redirigir al usuario a la página deseada
-        header("Location: MenuUsuarios.html");
+    if ($correo=='trabajador@angeles.com' and $result->num_rows == 1){
+        header("Location: MenuTrabajadores.html");
         exit();
-    } else {
-        // Las credenciales son inválidas, mostrar un mensaje de error
-        $error_message = "Correo o contraseña incorrectos";
-        header("Location: Login.html");
+    }else{
+    
+        if ($result->num_rows == 1) {
+            // Las credenciales son válidas, el usuario puede iniciar sesión
+            // Redirigir al usuario a la página deseada
+            header("Location: MenuUsuarios.html");
+            exit();
+        } else {
+            // Las credenciales son inválidas, mostrar un mensaje de error
+            $error_message = "Correo o contraseña incorrectos";
+            header("Location: Login.html");
+        }
     }
 }
 // Cerrar la conexión
