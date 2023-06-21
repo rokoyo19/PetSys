@@ -22,22 +22,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $contrasena = $_POST['contrasena'];
 
     // Consulta SQL para verificar el correo y la contraseña en la tabla "registro"
-    $sql = "SELECT * FROM registro WHERE correo = '$correo' AND contraseña = '$contrasena'";
+    $sql = "SELECT * FROM registro WHERE correo = '$correo' AND contrasena = '$contrasena'";
     $result = $conn->query($sql);
 
     // Verificar si se encontró un resultado
     if ($result->num_rows == 1) {
         // Las credenciales son válidas, el usuario puede iniciar sesión
         // Redirigir al usuario a la página deseada
-        //header("Location: dashboard.php");
-        header("Location: CATALOGO.html");
+        header("Location: MenuUsuarios.html");
         exit();
     } else {
         // Las credenciales son inválidas, mostrar un mensaje de error
         $error_message = "Correo o contraseña incorrectos";
+        header("Location: Login.html");
     }
 }
-
 // Cerrar la conexión
 $conn->close();
 ?>

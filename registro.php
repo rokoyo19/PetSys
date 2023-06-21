@@ -16,7 +16,7 @@ $correo = $_POST['correo'];
 $fecha_nacimiento = $_POST['fecha-nacimiento'];
 $contrasena = $_POST['contrasena'];
 
-$sql = "INSERT INTO registro (nombres, apellidos, correo, fecha_nacimiento, contraseña)
+$sql = "INSERT INTO registro (nombres, apellidos, correo, fecha_nacimiento, contrasena)
         VALUES (?, ?, ?, ?, ?)";
 
 $stmt = $conn->prepare($sql);

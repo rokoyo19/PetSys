@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Mascotas</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+        }
+    </style>
+    <script>
+        function cambiarTextoBoton(boton) {
+            if (boton.innerHTML === "Publicar mascota") {
+                boton.innerHTML = "Eliminar publicación";
+            } else if (boton.innerHTML === "Eliminar publicación") {
+                boton.innerHTML = "Publicar mascota";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Lista de Mascotas Registradas</h1>
+
+    <?php
+    // Conexión a la base de datos y consulta de mascotas
+    $conexion = mysqli_connect("localhost", "usuario", "contraseña", "basedatos");
+    $consulta = mysqli_query($conexion, "SELECT nombre FROM mascotas");
+
+    // Generar la lista de mascotas
+    echo "<ul>";
+    while ($fila = mysqli_fetch_assoc($consulta)) {
+        echo "<li>{$fila['nombre']} <button onclick=\"cambiarTextoBoton(this)\">Publicar mascota</button></li>";
+    }
+    echo "</ul>";
+
+    // Cerrar la conexión a la base de datos
+    mysqli_close($conexion);
+    ?>
+
+</body>
+</html>
