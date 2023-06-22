@@ -67,11 +67,8 @@
     <div id="mascotas-list">
         <!-- Aquí se mostrará la lista de nombres de mascotas -->
     </div>
-            <
+    
     <script>
-        // Obtener el array de nombres de mascotas desde PHP
-        const nombresMascotas = <?php echo $nombresMascotasJSON; ?>;
-
         // Función para generar dinámicamente el HTML con los nombres de las mascotas
         function generarListaMascotas() {
             const mascotasList = document.getElementById('mascotas-list');
@@ -86,6 +83,5 @@
         // Llamar a la función para generar la lista de mascotas al cargar la página
         generarListaMascotas();
     </script>
-</body>
 </body>
 </html>
