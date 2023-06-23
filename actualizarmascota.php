@@ -23,19 +23,25 @@ if (isset($_POST['id'])) {
         $especie = $_POST['especie'];
 
         // Verificar si se ha subido una nueva foto
-        if (!empty($_FILES['nuevaFoto']['name'])) {
-            $directorio_destino = 'C:\wamp64\www\mascotas\FotosMascotas';
-            $foto_nombre = $_FILES['nuevaFoto']['name'];
-            $foto_temporal = $_FILES['nuevaFoto']['tmp_name'];
-            $foto_destino = $directorio_destino . '/' . $foto_nombre;
+       // Verificar si se ha enviado una nueva foto de mascota
+if (isset($_FILES['nuevaFoto'])) {
+    $fotoTemporal = $_FILES['nuevaFoto']['tmp_name'];
+    $fotoNombre = $_FILES['nuevaFoto']['name'];
+    $fotoDestino = "FotosMascotas/" . $fotoNombre; // Ruta de destino en el sistema de archivos
 
-            // Mover la nueva foto al directorio destino
-            if (move_uploaded_file($foto_temporal, $foto_destino)) {
-                // Actualizar la ruta de la foto en la base de datos
-                $updateQuery = "UPDATE mascotas SET fotodelamascota = '$foto_destino' WHERE id = $mascotaId";
-                $mysqli->query($updateQuery);
-            }
+    // Mover la foto temporal al destino
+    if (move_uploaded_file($fotoTemporal, $fotoDestino)) {
+        echo "La nueva foto se ha guardado correctamente.";
+        // Actualizar la ruta de la foto en la base de datos
+        $query = "UPDATE mascotas SET fotodelamascota = '$fotoDestino' WHERE id = $mascotaId";
+        $result = $mysqli->query($query);
+        if (!$result) {
+            echo "Error al actualizar la ruta de la foto en la base de datos.";
         }
+    } else {
+        echo "Error al guardar la nueva foto.";
+    }
+}
 
         // Actualizar los demás datos de la mascota en la base de datos
         $updateQuery = "UPDATE mascotas SET nombre = '$nombre', raza = '$raza', edad = $edad, tamaño = '$tamaño', estadosalud = '$estadosalud', antecedentes = '$antecedentes', especie = '$especie' WHERE id = $mascotaId";
