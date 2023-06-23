@@ -30,18 +30,20 @@
     <main>
         <div class="col-md-7 col-lg-8">
             <h4 class="mb-3">Solicitud de adopción</h4>
-            <form id="adoptionForm" class="needs-validation" novalidate>
+            <form id="adoptionForm" class="needs-validation" novalidate action="solicitud.php" method="POST">
+
+            
                 <div class="row g-3">
                     <div class="col-sm-6">
                         <label for="firstName" class="form-label">Nombre:</label>
-                        <input type="text" class="form-control" id="Nombre" placeholder="" required>
+                        <input type="text" class="form-control" id="Nombre" name="Nombre" placeholder="" required>
                         <div class="invalid-feedback">
                             Por favor, ingresa un nombre válido.
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <label for="Empleo" class="form-label">Empleo:</label>
-                        <input type="text" class="form-control" id="Empleo" placeholder="" required>
+                        <input type="text" class="form-control" id="Empleo" name="Empleo" placeholder="" required>
                         <div class="invalid-feedback">
                             Por favor, ingresa un empleo válido.
                         </div>
@@ -50,14 +52,14 @@
                 <div class="row g-3">
                     <div class="col-sm-6">
                         <label for="Apellido" class="form-label">Apellido:</label>
-                        <input type="text" class="form-control" id="Apellido" placeholder="" required>
+                        <input type="text" class="form-control" id="Apellido" name="Apellido" placeholder="" required>
                         <div class="invalid-feedback">
                             Por favor, ingresa un apellido válido.
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <label for="Dirección" class="form-label">Dirección:</label>
-                        <input type="text" class="form-control" id="Dirección" placeholder="" required>
+                        <input type="text" class="form-control" id="Dirección" name="Dirección" required>
                         <div class="invalid-feedback">
                             Por favor, ingresa una dirección válida.
                         </div>
@@ -66,14 +68,14 @@
                 <div class="row g-3">
                     <div class="col-sm-6">
                         <label for="Teléfono" class="form-label">Teléfono:</label>
-                        <input type="text" class="form-control" id="Teléfono" placeholder="" required>
+                        <input type="text" class="form-control" id="Teléfono" name="Teléfono" required>
                         <div class="invalid-feedback">
                             Por favor, ingresa un número de teléfono válido.
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <label for="Correo" class="form-label">Correo:</label>
-                        <input type="text" class="form-control" id="Correo" placeholder="" required>
+                        <input type="text" class="form-control" id="Correo" name="Correo" required>
                         <div class="invalid-feedback">
                             Por favor, ingresa un correo electrónico válido.
                         </div>
@@ -82,10 +84,11 @@
                 <div class="row g-3">
                     <div class="col-md-5">
                         <label for="country" class="form-label">Cédula:</label>
-                        <select class="form-select" id="country" required>
+                        <select class="form-select" id="country" name="country" required>
                             <option value="">Seleccionar...</option>
                             <option>Cédula extranjera</option>
                             <option>Tarjeta de identidad</option>
+                            <option>Cédula ciudadania</option>
                         </select>
                         <div class="invalid-feedback">
                             Por favor, selecciona una opción válida.
@@ -93,7 +96,7 @@
                     </div>
                     <div class="col-sm-6">
                         <label for="cedula" class="form-label">Número de cédula:</label>
-                        <input type="text" class="form-control" id="cedula" placeholder="" required>
+                        <input type="text" class="form-control" id="cedula" name="cedula" required>
                         <div class="invalid-feedback">
                             Por favor, ingresa un número de cédula válido.
                         </div>
@@ -101,7 +104,7 @@
                 </div>
                 <div class="col-sm-6">
                     <label for="Ingresos" class="form-label">Ingresos mensuales:</label>
-                    <input type="text" class="form-control" id="Ingresos" placeholder="" required>
+                    <input type="text" class="form-control" id="Ingresos" name="Ingresos" required>
                     <div class="invalid-feedback">
                         Por favor, ingresa un monto válido para los ingresos mensuales.
                     </div>
@@ -125,23 +128,6 @@
     </main>
 </div>
 
-<script>
-    // Función para validar el formulario
-    function validateForm(event) {
-        event.preventDefault();
-        const form = document.getElementById('adoptionForm');
-        if (!form.checkValidity()) {
-            form.classList.add('was-validated');
-        } else {
-            // El formulario es válido, se puede enviar la solicitud de adopción
-            alert('La solicitud de adopción ha sido enviada.');
-        }
-    }
-
-    // Asignar la función de validación al evento submit del formulario
-    const form = document.getElementById('adoptionForm');
-    form.addEventListener('submit', validateForm);
-</script>
 
 </body>
 </html>

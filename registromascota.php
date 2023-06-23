@@ -30,17 +30,21 @@ $foto_destino = $directorio_destino . '/' . $foto_nombre;
 
 if (move_uploaded_file($foto_temporal, $foto_destino)) {
     // La foto se subió correctamente, ahora puedes guardar el resto de los datos en la base de datos
+    
+    // Obtener la ruta relativa de la foto (a partir de la carpeta "FotosMascotas")
+    $ruta_foto = 'FotosMascotas/' . $foto_nombre;
 
     // Crear la consulta SQL para insertar los datos en la tabla "mascotas"
-    $consulta = "INSERT INTO mascotas (fotodelamascota, nombre, edad, raza, tamaño, estadosalud, antecedentes, especie, estado) VALUES ('$foto_nombre', '$nombre', $edad, '$raza', '$tamaño', '$estado_salud', '$antecedentes', '$especie', '$estado')";
+    $consulta = "INSERT INTO mascotas (fotodelamascota, nombre, edad, raza, tamaño, estadosalud, antecedentes, especie, estado) VALUES ('$ruta_foto', '$nombre', $edad, '$raza', '$tamaño', '$estado_salud', '$antecedentes', '$especie', '$estado')";
 
     // Ejecutar la consulta
     if ($conn->query($consulta) === TRUE) {
         // Registro insertado correctamente
-        echo "Mascota registrada exitosamente.";
+        header("Location: MenuTrabajadores.html");
+            exit();
     } else {
         // Error al insertar el registro
-        echo "Error al registrar la mascota: " . $conn->error;
+        echo "Error al registrar la mascota: ";
     }
 } else {
     // Error al subir la foto

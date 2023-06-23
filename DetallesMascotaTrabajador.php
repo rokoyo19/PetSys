@@ -51,7 +51,7 @@
                     <strong>Angeles de cuatro patas</strong>
                 </a>
                 <div class="button-group">
-                    <a href="CATALOGO.html">
+                    <a href="PublicarMascota.php">
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>
@@ -63,27 +63,65 @@
             </div>
         </div>
     </header>
-    <main>
-        <div id="container">
-            <div id="info-box">
-                <p>Nombre</p>
-                <p>Edad</p>
-                <p>Raza</p>
-                <p>Especie</p>
-                <p>Estado de salud</p>
-                <p>Tamaño</p>
-                <p>Antecedentes</p>
-                <div id="buttons">
-                    <a href="Apadrinamiento">
-                        <button class="button">Apadrinar</button>
-                    </a>
-                    <a href="Adoptar.html">
-                        <button class="button">Adoptar</button>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <body>
+    </div>
+    <?php
+$username = "root";
+$password = "";
+$database = "appmascotas";
+$mysqli = new mysqli("localhost", $username, $password, $database);
+
+// Obtener el ID de la mascota desde la URL
+if (isset($_GET['id'])) {
+    $mascotaId = $_GET['id'];
+
+    // Consultar la base de datos para obtener los datos de la mascota con el ID especificado
+    $query = "SELECT id, nombre, raza, edad, fotodelamascota, tamaño, estadosalud, antecedentes, especie, estado FROM mascotas WHERE id = $mascotaId";
+    $result = $mysqli->query($query);
+
+    if ($result && $result->num_rows > 0) {
+        // La mascota se encontró en la base de datos, mostrar los datos
+        $mascota = $result->fetch_assoc();
+        $id = $mascota['id'];
+        $nombre = $mascota['nombre'];
+        $raza = $mascota['raza'];
+        $edad = $mascota['edad'];
+        $fotodelamascota = $mascota['fotodelamascota'];
+        $tamaño = $mascota['tamaño'];
+        $estadosalud = $mascota['estadosalud'];
+        $antecedentes = $mascota['antecedentes'];
+        $especie = $mascota['especie'];
+        $estado = $mascota['estado'];
+
+        // Mostrar la imagen de la mascota centrada y fuera del recuadro blanco
+        echo "<div style='text-align: center;'>";
+        echo "<img src='$fotodelamascota' alt='Foto de la mascota' style='max-width: 300px; max-height: 300px;'>";
+        echo "</div>";
+        
+        // Mostrar los datos de la mascota en un recuadro blanco más pequeño
+        echo "<div style='background-color: white; padding: 10px; border: 1px solid black; text-align: center; width: 400px; margin: 20px auto;'>";        
+        echo "<p>Nombre: $nombre</p>";
+        echo "<p>Raza: $raza</p>";
+        echo "<p>Edad: $edad años</p>";
+        echo "<p>Tamaño: $tamaño</p>";
+        echo "<p>Estado de salud: $estadosalud</p>";
+        echo "<p>Antecedentes: $antecedentes</p>";
+        echo "<p>Especie: $especie</p>";
+        echo "<p>Estado: $estado</p>";        
+        echo "</div>";
+
+    } else {
+        // No se encontró una mascota con el ID especificado
+        echo "<h1>No se encontró la mascota</h1>";
+    }
+} else {
+    // No se proporcionó un ID de mascota en la URL
+    echo "<h1>No se especificó un ID de mascota</h1>";
+}
+?>
+
+
+</body>
 </body>
 </html>

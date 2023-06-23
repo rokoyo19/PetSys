@@ -29,7 +29,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         // Ejecutar la consulta SQL
         if ($conn->query($sql) === TRUE) {
-            echo "Los datos se guardaron correctamente.";
+            header("Location: MenuUsuarios.html");
+            exit();
         } else {
             echo "Error al guardar los datos: " . $conn->error;
         }
