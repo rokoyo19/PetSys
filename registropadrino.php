@@ -4,12 +4,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Verificar si se aceptaron los términos y condiciones
     if (isset($_POST["acceptTerms"])) {
         // Obtener los datos del formulario
-        $nombre = $_POST["Nombre"];
         $telefono = $_POST["Telefono"];
-        $apellido = $_POST["Apellido"];
-        $correo = $_POST["Correo"];
         $tipoCedula = $_POST["TipoCedula"];
         $cedula = $_POST["Cedula"];
+        // Obtener el valor del atributo "llave" del URL y decodificarlo
+        $correo = urldecode($_GET['llave']) ?? '';   
+        // Obtener el valor del atributo "id" del URL y decodificarlo
+        $idmascota= urldecode($_GET['id']) ?? '';   
+        $llave=urldecode($_GET['llave']) ?? '';   
         
         // Crear una conexión a la base de datos
         $servername = "localhost";
@@ -25,11 +27,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         
         // Crear la consulta SQL para insertar los datos en la tabla "padrino"
-        $sql = "INSERT INTO padrinos (nombre, telefono, apellido, correo, tipo_cedula, cedula) VALUES ('$nombre', '$telefono', '$apellido', '$correo', '$tipoCedula', '$cedula')";
+        $sql = "INSERT INTO padrinos (telefono, correo, tipo_cedula, cedula, idmascota) VALUES ('$telefono', '$correo', '$tipoCedula', '$cedula', '$idmascota')";
         
         // Ejecutar la consulta SQL
         if ($conn->query($sql) === TRUE) {
-            header("Location: MenuUsuarios.html");
+            header("Location: MenuUsuarios.php?llave=$llave");
             exit();
         } else {
             echo "Error al guardar los datos: " . $conn->error;

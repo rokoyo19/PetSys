@@ -26,21 +26,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $conn->query($sql);
 
     // Verificar si se encontró un resultado
-    if ($correo=='trabajador@angeles.com' and $result->num_rows == 1){
-        header("Location: MenuTrabajadores.html");
+    if ($result->num_rows == 1) {
+        // Las credenciales son válidas, el usuario puede iniciar sesión
+        // Obtener la fila de la consulta
+        $row = $result->fetch_assoc();
+
+        // Obtener la clave correspondiente al correo electrónico
+        $clave = $row['clave'];
+            if($correo=='trabajador@angeles.com' and $result->num_rows == 1){
+                header("Location: MenuTrabajadores.html");
+                exit();}
+            else{
+        // Redirigir al usuario a la página deseada con la clave como parámetro GET
+        header("Location: MenuUsuarios.php?llave=$correo");
+        exit();}
+    } else {
+        // Las credenciales son inválidas, mostrar un mensaje de error
+        $error_message = "Correo o contraseña incorrectos";
+        header("Location: Login.html");
         exit();
-    }else{
-    
-        if ($result->num_rows == 1) {
-            // Las credenciales son válidas, el usuario puede iniciar sesión
-            // Redirigir al usuario a la página deseada
-            header("Location: MenuUsuarios.html");
-            exit();
-        } else {
-            // Las credenciales son inválidas, mostrar un mensaje de error
-            $error_message = "Correo o contraseña incorrectos";
-            header("Location: Login.html");
-        }
     }
 }
 // Cerrar la conexión

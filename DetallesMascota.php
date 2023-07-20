@@ -67,6 +67,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <?php
+    $llave = urldecode($_GET['llave']) ?? '';
 $username = "root";
 $password = "";
 $database = "appmascotas";
@@ -113,10 +114,10 @@ if (isset($_GET['id'])) {
 
         // Separar los botones "Adoptar" y "Apadrinar" en diferentes líneas
         echo "<div style='display: flex; justify-content: space-between; margin-top: 10px;'>";
-        echo "<a href='Apadrinamiento?id=$id'>";
+        echo "<a href='Apadrinamiento.php?id=$id&llave=$llave'>";
         echo "<button class='button'>Apadrinar</button>";
         echo "</a>";
-        echo "<a href='Adoptar.html?id=$id'>";
+        echo "<a href='Adoptar.php?id=$id&llave=$llave'>";
         echo "<button class='button'>Adoptar</button>";
         echo "</a>";
         echo "</div>";

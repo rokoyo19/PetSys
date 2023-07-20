@@ -23,7 +23,14 @@
         </div>
     </header>
     <div class="d-flex justify-content-center">
-        <a href="CATALOGO.php" class="btn btn-primary btn-lg">Catálogo</a>
+        <?php
+            // Obtener el valor del atributo "llave" del URL y decodificarlo
+            $llave = urldecode($_GET['llave']) ?? '';
+            
+            // Generar el enlace a "CATALOGO.php" con el valor de "llave" en el URL
+            $enlaceCatalogo = "CATALOGO.php?llave=$llave"
+        ?>
+        <a href="<?php echo $enlaceCatalogo; ?>" class="btn btn-primary btn-lg">Catálogo</a>
     </div>
     <div class="d-flex justify-content-center">
         <a href="CancelarAdopcion.html" class="btn btn-primary btn-lg">Cancelar Adopciones</a>

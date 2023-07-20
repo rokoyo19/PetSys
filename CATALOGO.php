@@ -22,7 +22,7 @@
                     <img src="img/logo.png" width="50" height="50" alt="">
                     <strong>Ángeles de cuatro patas</strong>
                 </div>
-                <a href="MenuUsuarios.html">
+                <a href="MenuUsuarios.php">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
                         <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
@@ -47,6 +47,8 @@
 
     
     <?php
+    // Obtener el valor del atributo "llave" del URL y decodificarlo
+    $llave = urldecode($_GET['llave']) ?? '';
 $username = "root";
 $password = "";
 $database = "appmascotas";
@@ -68,7 +70,7 @@ if ($result && $result->num_rows > 0) {
         echo "<div style='background-color: white; padding: 20px; margin-bottom: 20px; display: inline-block; text-align: center; margin-right: 10px;'>";
         echo "<img src='$fotodelamascota' alt='Foto de la mascota' style='width: 300px; height: 300px; object-fit: cover;'><br>";
         echo "<p style='margin-top: 10px;'>Hola, mi nombre es $nombre. ¡Adóptame!</p>";
-        echo "<a href='DetallesMascota.php?id=$id'><button type='button' class='btn btn-sm btn-outline-secondary'>Ver detalles</button></a>";
+        echo "<a href='DetallesMascota.php?id=$id&llave=$llave'><button type='button' class='btn btn-sm btn-outline-secondary'>Ver detalles</button></a>";
         echo "</div>";
     }
     echo "</div>";

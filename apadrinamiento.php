@@ -48,15 +48,12 @@
         <main>
             <div class="col-md-7 col-lg-8">
                 <h4 class="mb-3"></h4>
-                <form class="needs-validation" action="registropadrino.php" method="POST" novalidate>
-                    <div class="row g-3">
-                        <div class="col-sm-6">
-                            <label for="Nombre" class="form-label">Nombre:</label>
-                            <input type="text" class="form-control" id="Nombre" name="Nombre" placeholder="" value="" required>
-                            <div class="invalid-feedback">
-                                El nombre es requerido.
-                            </div>
-                        </div>
+                <?php
+                    $idmascota = $_GET['id'] ?? '';
+                    $correo = $_GET['llave'] ?? '';
+                ?>
+                <form class="needs-validation" action="registropadrino.php?id=<?php echo $idmascota ?>&llave=<?php echo $correo ?>" method="POST" novalidate>
+                    
 
                         <div class="col-sm-6">
                             <label for="Telefono" class="form-label">Teléfono:</label>
@@ -69,23 +66,7 @@
 
                     <h4 class="mb-3"></h4>
 
-                    <div class="row g-3">
-                        <div class="col-sm-6">
-                            <label for="Apellido" class="form-label">Apellido:</label>
-                            <input type="text" class="form-control" id="Apellido" name="Apellido" placeholder="" value="" required>
-                            <div class="invalid-feedback">
-                                El apellido es requerido.
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6">
-                            <label for="Correo" class="form-label">Correo:</label>
-                            <input type="email" class="form-control" id="Correo" name="Correo" placeholder="" value="" required>
-                            <div class="invalid-feedback">
-                                El correo es requerido.
-                            </div>
-                        </div>
-
+                    
                         <div class="col-md-5">
                             <label for="TipoCedula" class="form-label">Tipo de cédula:</label>
                             <select class="form-select" id="TipoCedula" name="TipoCedula" required>
@@ -106,7 +87,7 @@
                                 La cédula es requerida.
                             </div>
                         </div>
-                    </div>
+                    
 
                     <div class="form-group">
                         <div class="form-check">
@@ -121,9 +102,9 @@
                     <div>
                         <a href="#" class="button">Ver términos y condiciones</a>
                     </div>
-
+                    
                     <div class="form-group">
-                        <input type="submit" value="Enviar" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary" name="enviar">Enviar</button>
                     </div>
                 </form>
             </div>

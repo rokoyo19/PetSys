@@ -35,33 +35,22 @@
 
 <div class="container">
     <main>
+    <div class="col-md-7 col-lg-8">
+                <h4 class="mb-3"></h4>
+                <?php
+                    $idmascota = $_GET['id'] ?? '';
+                    $correo = $_GET['llave'] ?? '';
+                ?>
+                <form class="needs-validation" action="registrosolicitudadopcion.php?id=<?php echo $idmascota ?>&llave=<?php echo $correo ?>" method="POST" novalidate enctype="multipart/form-data">
         <div class="col-md-7 col-lg-8">
             <h4 class="mb-3">Solicitud de adopción</h4>
-            <form id="adoptionForm" class="needs-validation" novalidate action="solicitud.php" method="POST">
-
-            
+            <form id="adoptionForm" class="needs-validation" novalidate action="registrosolicitudadopcion.php" method="POST">
                 <div class="row g-3">
-                    <div class="col-sm-6">
-                        <label for="firstName" class="form-label">Nombre:</label>
-                        <input type="text" class="form-control" id="Nombre" name="Nombre" placeholder="" required>
-                        <div class="invalid-feedback">
-                            Por favor, ingresa un nombre válido.
-                        </div>
-                    </div>
                     <div class="col-sm-6">
                         <label for="Empleo" class="form-label">Empleo:</label>
                         <input type="text" class="form-control" id="Empleo" name="Empleo" placeholder="" required>
                         <div class="invalid-feedback">
                             Por favor, ingresa un empleo válido.
-                        </div>
-                    </div>
-                </div>
-                <div class="row g-3">
-                    <div class="col-sm-6">
-                        <label for="Apellido" class="form-label">Apellido:</label>
-                        <input type="text" class="form-control" id="Apellido" name="Apellido" placeholder="" required>
-                        <div class="invalid-feedback">
-                            Por favor, ingresa un apellido válido.
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -80,17 +69,8 @@
                             Por favor, ingresa un número de teléfono válido.
                         </div>
                     </div>
-                    <div class="col-sm-6">
-                        <label for="Correo" class="form-label">Correo:</label>
-                        <input type="text" class="form-control" id="Correo" name="Correo" required>
-                        <div class="invalid-feedback">
-                            Por favor, ingresa un correo electrónico válido.
-                        </div>
-                    </div>
-                </div>
-                <div class="row g-3">
                     <div class="col-md-5">
-                        <label for="country" class="form-label">Cédula:</label>
+                        <label for="country" class="form-label">Tipo de Documento:</label>
                         <select class="form-select" id="country" name="country" required>
                             <option value="">Seleccionar...</option>
                             <option>Cédula extranjera</option>
@@ -101,11 +81,20 @@
                             Por favor, selecciona una opción válida.
                         </div>
                     </div>
+                </div>
+                <div class="row g-3">
                     <div class="col-sm-6">
-                        <label for="cedula" class="form-label">Escaneo de la cédula:</label>
-                        <input type="file" class="form-control" id="cedula" name="cedula" required>
+                        <label for="archivo_cedula" class="form-label">Escaneo de la cédula:</label>
+                        <input type="file" class="form-control" id="archivo_cedula" name="archivo_cedula" required>
                         <div class="invalid-feedback">
-                            Por favor, ingresa un número de cédula válido.
+                            Por favor, ingresa un archivo válido.
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="cedula" class="form-label">Numero de cedula:</label>
+                        <input type="text" class="form-control" id="cedula" name="cedula" required>
+                        <div class="invalid-feedback">
+                            Por favor, ingresa un número válido para la cédula.
                         </div>
                     </div>
                 </div>
@@ -122,7 +111,7 @@
                         <label class="form-check-label" for="acceptTerms">
                             Acepto los términos y condiciones
                             <span>
-                            <div><a href="TyC.pdf" target="_blank">ver términos y condiciones</a></div>
+                                <a href="TyC.pdf" target="_blank">Ver términos y condiciones</a>
                             </span>
                         </label>
                         <div class="invalid-feedback">
@@ -137,5 +126,7 @@
         </div>
     </main>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-v5i5A+2Ufta5EVb6iKt7rO4E6n7Yo/uRY2DmEIfw7s/xwnMfa6Ftz/v81Ry3EfDo" crossorigin="anonymous"></script>
 </body>
 </html>
