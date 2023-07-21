@@ -32,6 +32,126 @@
             </div>
         </div>
     </header>
+    </header>
+      <style>
+        #filter-container {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 10px;
+            margin-right: 1050px;
+            color: white;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            display: none;
+        }
+        
+        .radio-input {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        
+        .radio-input input[type="radio"] {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<button class="boton" onclick="toggleFilters()">Mostrar Filtros</button>
+
+<div id="filter-container">
+    <h2>Edad:</h2>
+    <label class="radio-input">
+        <input type="radio" name="edad" value="1mes-6mes">
+        1 mes a 6 meses
+    </label>
+    <label class="radio-input">
+      <input type="radio" name="edad" value="6mes-1año">
+      6 meses a 1 año
+  </label>
+  <label class="radio-input">
+    <input type="radio" name="edad" value="1año-2año">
+    1 año a 2 años
+</label>
+<label class="radio-input">
+  <input type="radio" name="edad" value="2año-3año">
+  2 años a 3 años
+</label>
+<label class="radio-input">
+  <input type="radio" name="edad" value="3año-delante">
+  3 años en adelante
+</label>
+    
+    <h2>Especie:</h2>
+    <label class="radio-input">
+        <input type="radio" name="especie" value="Gato">
+        Gato
+    </label>
+    <label class="radio-input">
+      <input type="radio" name="especie" value="Perro">
+      Perro
+  </label>
+  <label class="radio-input">
+    <input type="radio" name="especie" value="Otro">
+    Otro
+</label>
+    
+    <h2>Tamaño:</h2>
+    <label class="radio-input">
+        <input type="radio" name="tamano" value="pequeño">
+        Pequeño
+    </label>
+    <label class="radio-input">
+      <input type="radio" name="tamano" value="mediano">
+      Mediano
+  </label><label class="radio-input">
+    <input type="radio" name="tamano" value="grande">
+    Grande
+</label>
+    <style>
+      .boton {
+        background-color: white;
+        color: black;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 10px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 4px;
+        font-weight: bold;
+      }
+    </style>
+    <button class="boton" onclick="applyFilters()">Aplicar Filtro</button>
+</div>
+
+<script>
+    function toggleFilters() {
+        var filterContainer = document.getElementById('filter-container');
+        if (filterContainer.style.display === 'none') {
+            filterContainer.style.display = 'block';
+        } else {
+            filterContainer.style.display = 'none';
+        }
+    }
+    
+    function applyFilters() {
+        var edad = document.querySelector('input[name="edad"]:checked').value;
+        var especie = document.querySelector('input[name="especie"]:checked').value;
+        var tamano = document.querySelector('input[name="tamano"]:checked').value;
+        
+        // Aquí puedes realizar la lógica para aplicar los filtros a tu catálogo
+        // Puedes acceder a las variables "edad", "especie" y "tamano" y realizar las acciones correspondientes
+        
+        console.log('Filtros aplicados:');
+        console.log('Edad:', edad);
+        console.log('Especie:', especie);
+        console.log('Tamaño:', tamano);
+    }
+</script>
     <main>
       <div class="container">    
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
