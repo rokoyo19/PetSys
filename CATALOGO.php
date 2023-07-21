@@ -22,12 +22,15 @@
                     <img src="img/logo.png" width="50" height="50" alt="">
                     <strong>Ángeles de cuatro patas</strong>
                 </div>
-                <a href="MenuUsuarios.php">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+                <?php
+    // Obtener el valor del atributo "llave" del URL y decodificarlo
+    $llave = urldecode($_GET['llave']) ?? '';?>
+                <a href="MenuUsuarios.php?llave=<?php echo urlencode($llave); ?>">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
                         <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
-                    </svg>
-                </button>  
+                        </svg>
+                        </button>
                 </a>
             </div>
         </div>
@@ -64,24 +67,24 @@
 <div id="filter-container">
     <h2>Edad:</h2>
     <label class="radio-input">
-        <input type="radio" name="edad" value="1mes-6mes">
-        1 mes a 6 meses
+        <input type="radio" name="edad" value="0años-0.9años">
+        menos de 1 año
     </label>
     <label class="radio-input">
-      <input type="radio" name="edad" value="6mes-1año">
-      6 meses a 1 año
+      <input type="radio" name="edad" value="1año">
+      1 año
   </label>
   <label class="radio-input">
-    <input type="radio" name="edad" value="1año-2año">
-    1 año a 2 años
+    <input type="radio" name="edad" value="2años">
+    2 años
 </label>
 <label class="radio-input">
-  <input type="radio" name="edad" value="2año-3año">
-  2 años a 3 años
+  <input type="radio" name="edad" value="3años">
+  3 años
 </label>
 <label class="radio-input">
-  <input type="radio" name="edad" value="3año-delante">
-  3 años en adelante
+  <input type="radio" name="edad" value="4años-20años">
+  4 años en adelante
 </label>
     
     <h2>Especie:</h2>
@@ -107,7 +110,7 @@
       <input type="radio" name="tamano" value="mediano">
       Mediano
   </label><label class="radio-input">
-    <input type="radio" name="tamano" value="grande">
+    <input type="radio" name="tamano" value="Grande">
     Grande
 </label>
     <style>
@@ -139,17 +142,18 @@
     }
     
     function applyFilters() {
-        var edad = document.querySelector('input[name="edad"]:checked').value;
-        var especie = document.querySelector('input[name="especie"]:checked').value;
-        var tamano = document.querySelector('input[name="tamano"]:checked').value;
+        var edad = document.querySelector('input[name="edad"]:checked')?.value || '';
+        var especie = document.querySelector('input[name="especie"]:checked')?.value || '';
+        var tamano = document.querySelector('input[name="tamano"]:checked')?.value || '';
         
         // Aquí puedes realizar la lógica para aplicar los filtros a tu catálogo
         // Puedes acceder a las variables "edad", "especie" y "tamano" y realizar las acciones correspondientes
-        
-        console.log('Filtros aplicados:');
-        console.log('Edad:', edad);
-        console.log('Especie:', especie);
-        console.log('Tamaño:', tamano);
+        var currentUrl = window.location.href;
+        var separator = currentUrl.includes('?') ? '&' : '?';
+        var filtersUrl = currentUrl + separator + 'edad=' + edad + '&especie=' + especie + '&tamano=' + tamano;
+
+        window.location.href = filtersUrl;
+
     }
 </script>
     <main>
@@ -173,9 +177,36 @@ $username = "root";
 $password = "";
 $database = "appmascotas";
 $mysqli = new mysqli("localhost", $username, $password, $database);
+// Obtener los valores de los filtros seleccionados
+$edad = $_GET['edad'] ?? '';
+$especie = $_GET['especie'] ?? '';
+$tamano = $_GET['tamano'] ?? '';
+
 
 // Consultar la base de datos para obtener las mascotas con estado 'publicado'
 $query = "SELECT id, nombre, fotodelamascota FROM mascotas WHERE estado = 'publicado'";
+if ($edad !== '') {
+    if ($edad=='4años-20años'){
+        $query .= " AND edad >= '4'";  
+    }
+    else{
+        if ($edad=='0años-0.9años'){
+            $query .= " AND edad < '1'";} 
+        else{
+            $query .= " AND edad = '$edad'";
+        }
+    }
+    
+}
+
+if ($especie !== '') {
+    $query .= " AND especie = '$especie'";
+}
+
+if ($tamano !== '') {
+    $query .= " AND tamaño = '$tamano'";
+}
+
 $result = $mysqli->query($query);
 
 // Verificar si se encontraron mascotas
