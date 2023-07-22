@@ -28,15 +28,17 @@
             $llave = urldecode($_GET['llave']) ?? '';
             
             // Generar el enlace a "CATALOGO.php" con el valor de "llave" en el URL
-            $enlaceCatalogo = "CATALOGO.php?llave=$llave"
+            $enlaceCatalogo = "CATALOGO.php?llave=$llave";
+            $enlaceCancelarAdopcion = "CancelarAdopcion.php?llave=$llave";
+            $enlaceCancelarApadrinamiento = "CancelarApadrinamiento.php?llave=$llave";
         ?>
         <a href="<?php echo $enlaceCatalogo; ?>" class="btn btn-primary btn-lg">Catálogo</a>
     </div>
     <div class="d-flex justify-content-center">
-        <a href="CancelarAdopcion.html" class="btn btn-primary btn-lg">Cancelar Adopciones</a>
+        <a href="<?php echo $enlaceCancelarAdopcion; ?>" class="btn btn-primary btn-lg">Cancelar Adopciones</a>
     </div>
     <div class="d-flex justify-content-center">
-        <a href="CancelarApadrinamiento.html" class="btn btn-primary btn-lg">Cancelar Apadrinamientos</a>
+        <a href="<?php echo $enlaceCancelarApadrinamiento; ?>" class="btn btn-primary btn-lg">Cancelar Apadrinamientos</a>
     </div>
 </body>
 </html>
