@@ -95,7 +95,7 @@
                     </div>
 
                     <div>
-                        <a href="TERMINOS.html" class="button">Ver términos y condiciones</a>
+                    <a href="TERMINOS.html" class="button" target="_blank">Ver términos y condiciones</a>
                  
                     </div>
                     
