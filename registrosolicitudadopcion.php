@@ -4,6 +4,7 @@ $escaneosDir = "Escaneos/";
 
 // Verificar si se recibieron los datos del formulario
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST["acceptTerms"])) {
     // Obtener los valores del formulario
     $empleo = $_POST['Empleo'] ?? '';
     $direccion = $_POST['Dirección'] ?? '';
@@ -31,44 +32,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($conn->connect_error) {
         die('Error de conexión: ' . $conn->connect_error);
     }
+    if(empty($empleo) != true and empty($direccion)!=true and empty($telefono)!=true and empty($tipoDocumento)!=true and empty($cedula)!=true and empty($ingresos)!=true ){
+            // Verificar si se cargó un archivo correctamente
+            if (isset($_FILES["archivo_cedula"]) && $_FILES["archivo_cedula"]["error"] === 0) {
+                // Obtener el tamaño del archivo
+                $fileSize = $_FILES["archivo_cedula"]["size"];
+            
+                // Verificar si el tamaño del archivo es mayor que cero
 
-    // Verificar si se cargó un archivo correctamente
-    if (isset($_FILES["archivo_cedula"]) && $_FILES["archivo_cedula"]["error"] === 0) {
-        // Obtener el tamaño del archivo
-        $fileSize = $_FILES["archivo_cedula"]["size"];
+                if ($fileSize > 0) {
+                    // Generar un nombre único para el archivo
+                    $filename = uniqid() . "_" . $_FILES["archivo_cedula"]["name"];
 
-        // Verificar si el tamaño del archivo es mayor que cero
-        if ($fileSize > 0) {
-            // Generar un nombre único para el archivo
-            $filename = uniqid() . "_" . $_FILES["archivo_cedula"]["name"];
+                    // Mover el archivo a la carpeta de escaneos
+                    move_uploaded_file($_FILES["archivo_cedula"]["tmp_name"], $escaneosDir . $filename);
 
-            // Mover el archivo a la carpeta de escaneos
-            move_uploaded_file($_FILES["archivo_cedula"]["tmp_name"], $escaneosDir . $filename);
+                    // Guardar la dirección del archivo en la base de datos
+                    $direccionArchivo = $escaneosDir . $filename;
 
-            // Guardar la dirección del archivo en la base de datos
-            $direccionArchivo = $escaneosDir . $filename;
+                    // Preparar la consulta SQL
+                    $sql = "INSERT INTO solicitudes_adopciones (empleo, direccion, telefono, cedula_tipo, cedula, ingresos_mensuales, idmascota, correo, escaneo_cedula)
+                            VALUES ('$empleo', '$direccion', '$telefono', '$tipoDocumento', '$cedula', '$ingresos', '$idmascota', '$correo','$direccionArchivo')";
 
-            // Preparar la consulta SQL
-            $sql = "INSERT INTO solicitudes_adopciones (empleo, direccion, telefono, cedula_tipo, cedula, ingresos_mensuales, idmascota, correo, escaneo_cedula)
-                    VALUES ('$empleo', '$direccion', '$telefono', '$tipoDocumento', '$cedula', '$ingresos', '$idmascota', '$correo','$direccionArchivo')";
-
-            // Ejecutar la consulta
-            if ($conn->query($sql) === TRUE) {
-                header("Location: MenuUsuarios.php?llave=$llave");
-                exit();
+                    // Ejecutar la consulta
+                    if ($conn->query($sql) === TRUE) {
+                        header("Location: MenuUsuarios.php?llave=$llave");
+                        exit();
+                    } else {
+                        echo 'Error al registrar la solicitud de adopción: ' . $conn->error;
+                    }
+                } else {
+                    echo 'Error: el archivo tiene un tamaño de cero bytes.';
+                }
             } else {
-                echo 'Error al registrar la solicitud de adopción: ' . $conn->error;
+                echo 'Error: no se cargó un archivo correctamente.';
             }
-        } else {
-            echo 'Error: el archivo tiene un tamaño de cero bytes.';
+        }else{
+            echo 'Error: Por favor llenar todos los datos.';
         }
-    } else {
-        echo 'Error: no se cargó un archivo correctamente.';
-    }
 
     // Cerrar la conexión
     $conn->close();
 } else {
-    echo 'Error: método de solicitud no válido.';
-}
+    echo 'Debes aceptar los términos y condiciones para continuar.';
+}}
 ?>

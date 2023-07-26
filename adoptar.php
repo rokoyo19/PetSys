@@ -110,16 +110,15 @@
                 </div>
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="acceptTerms" required>
-                        <label class="form-check-label" for="acceptTerms">
-                            Acepto los términos y condiciones
-                            <span>
-                                <a href="TyC.pdf" target="_blank">Ver términos y condiciones</a>
-                            </span>
-                        </label>
+                        <input class="form-check-input" type="checkbox" id="acceptTerms" name="acceptTerms" required>
+                        <label class="form-check-label" for="acceptTerms">Acepto los términos y condiciones</label>
                         <div class="invalid-feedback">
                             Debes aceptar los términos y condiciones para continuar.
                         </div>
+                            
+                            <span>
+                                <a href="TyC.pdf" target="_blank">Ver términos y condiciones</a>
+                            </span>
                     </div>
                 </div>
                 <div class="form-group">

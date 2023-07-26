@@ -25,10 +25,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($conn->connect_error) {
             die("Error al conectar con la base de datos: " . $conn->connect_error);
         }
-        
+        if(empty($telefono)!= true and empty($tipoCedula)!= true and empty($cedula)!=true){
         // Crear la consulta SQL para insertar los datos en la tabla "padrino"
         $sql = "INSERT INTO padrinos (telefono, correo, tipo_cedula, cedula, idmascota) VALUES ('$telefono', '$correo', '$tipoCedula', '$cedula', '$idmascota')";
-        
         // Ejecutar la consulta SQL
         if ($conn->query($sql) === TRUE) {
             header("Location: MenuUsuarios.php?llave=$llave");
@@ -36,6 +35,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             echo "Error al guardar los datos: " . $conn->error;
         }
+        }else{
+            echo "Error no se registraron los datos: " . $conn->error;
+        }
+        
         
         // Cerrar la conexión a la base de datos
         $conn->close();
