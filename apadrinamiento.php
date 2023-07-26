@@ -95,7 +95,8 @@
                     </div>
 
                     <div>
-                        <a href="#" class="button">Ver términos y condiciones</a>
+                        <a href="TERMINOS.html" class="button">Ver términos y condiciones</a>
+                 
                     </div>
                     
                     <div class="form-group">
