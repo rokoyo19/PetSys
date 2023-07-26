@@ -118,12 +118,14 @@
                         echo '<div class="alert alert-danger" role="alert">Error al rechazar la cita: ' . $conn->error . '</div>';
                     }
                 } elseif ($estado === "aceptada") {
-                    // El código para aceptar la cita permanece igual
-                    // ...
-                } elseif ($estado === "cancelada") {
-                    // El código para cancelar la cita permanece igual
-                    // ...
-                }
+                    
+                    $sql_update = "UPDATE adopciones SET estado = 'aceptada' WHERE idmascota = $idmascota AND correo = '$correo'";
+                    if ($conn->query($sql_update) === TRUE) {
+                        echo '<div class="alert alert-success text-black" role="alert">Cita aceptada exitosamente.</div>';
+                    } else {
+                        echo '<div class="alert alert-danger" role="alert">Error al aceptar la cita: ' . $conn->error . '</div>';
+                    }
+                } 
             }
 
             // Consulta SQL para obtener las citas por aceptar o rechazar
