@@ -98,7 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['idmascota'])) {
     </header>
     <div class="image-container">
         <a href="CitaAdoptante.php?llave=<?php echo $llave; ?>">
-            <img src="adopciones.png" width="60" height="60" alt="Redirigir">
+            <img src="adopciones.png" width="35" height="35" alt="Redirigir">
         </a>
     </div>
     <h2 class="titulo">
