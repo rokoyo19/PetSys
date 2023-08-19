@@ -38,6 +38,12 @@
             color: #FFFFFF; /* Color blanco */
             padding: 10px 20px; /* Espaciado interno */
         }
+        .agendar-button{
+            background-color: #FFFFFF; 
+            color: #000000; 
+            padding: 10px 20px; /* Espaciado interno */
+
+        }
         .alert{
             color: #FFFFFF; /* Color blanco */
             text-align: center; /* Centrado horizontal */
@@ -84,6 +90,9 @@
                 <th class="texto-blanco">Fecha de Cita</th>
                 <th class="texto-blanco">Aceptar Cita</th>
                 <th class="texto-blanco">Rechazar Cita</th>
+                <th class="texto-blanco">Solicitar Fecha Cita</th>
+                <th class="texto-blanco">Agendar</th>
+
             </tr>
         </thead>
         <tbody>
@@ -156,6 +165,22 @@
                     echo '<button type="submit" class="reject-button">Rechazar cita</button>';
                     echo '</form>';
                     echo '</td>';
+                    echo '<td>';
+                    echo '<form action="' . $_SERVER['PHP_SELF'] . '?llave=' . urlencode($llave) . '" method="post">';
+                    echo '<input type="hidden" name="idmascota" value="' . $row['idmascota'] . '">';
+                    echo '<input type="hidden" name="correo" value="' . $llave . '">';
+                    echo '<input type="hidden" name="estado" value="rechazada">';
+                    echo '<input type="date">';
+                    echo '</form>';
+                    echo '</td>';
+                    echo '<td>';
+                    echo '<form action="' . $_SERVER['PHP_SELF'] . '?llave=' . urlencode($llave) . '" method="post">';
+                    echo '<input type="hidden" name="idmascota" value="' . $row['idmascota'] . '">';
+                    echo '<input type="hidden" name="correo" value="' . $llave . '">';
+                    echo '<input type="hidden" name="estado" value="rechazada">';
+                    echo '<button type="submit" class="agendar-button">Agendar</button>';
+                    echo '</form>';
+                    echo '</td>';
                     echo '</tr>';
                 }
             } else {
@@ -214,6 +239,17 @@
                 form.submit();
             });
         });
+        const agendarButtons = document.querySelectorAll('.agendar-button');
+        agendarButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const form = button.parentElement;
+                form.submit();
+            });
+        });
+
+
+     
     </script>
+
 </body>
 </html>

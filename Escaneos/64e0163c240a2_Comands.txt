@@ -1,0 +1,91 @@
+# conf t
+hostname SW1
+banner motd #Acceso Autorizado#
+enable secret cisco
+service password-encry
+ip domain-name redes.com
+crypto key generate rsa general-keys modulus 1024
+ip ssh version 2
+line vty 0 4
+transport input ssh
+login local
+
+interface vlan 1
+ip address 192.168.0.10 255.255.255.0
+no shutdown 
+
+username admin privilege 15 secret cisco
+
+***********************************
+interface f0/9
+switchport voice vlan 14
++++++++++++++++
+
+do cualquier_comando
+
+show ip interface brief
+
+ipv6
+2001:DB8:ACAD:1::2
+
+
+Voip Router
+crear subinterfaces
+encap do1q vlan#
+asignar ip gat
+
+no shutdown a la int fisica
+
+configurar pool dhcp para asignar ip a los telefo
+ip dhcp pool name
+network ip.0 gat
+default-router  ip.1
+option 150 ip ip.1
+
+ex
+ip dhcp exclude ip.1
+******************************
+sw3(config)#interface f0/7
+sw3(config-if)#s
+sw3(config-if)#sw
+sw3(config-if)#switchport mo
+sw3(config-if)#switchport mode tr
+sw3(config-if)#switchport mode trunk 
+sw3(config-if)#
+sw3(config-if)#sw
+sw3(config-if)#switchport a
+sw3(config-if)#switchport al
+sw3(config-if)#switchport all
+sw3(config-if)#switchport tr
+sw3(config-if)#switchport trunk a
+sw3(config-if)#switchport trunk allowed v
+sw3(config-if)#switchport trunk allowed vlan 6,8,10,12,14,99
+*******************************
+#interface vlan 12
+SWM(config-if)#
+%LINK-5-CHANGED: Interface Vlan12, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Vlan12, changed state to up
+
+SWM(config-if)#i
+SWM(config-if)#ip 
+SWM(config-if)#ip dd
+SWM(config-if)#ip 
+SWM(config-if)#ip d
+SWM(config-if)#ip add
+SWM(config-if)#ip address 192.168.12.3
+% Incomplete command.
+SWM(config-if)#ip address 192.168.12.3 255.255.255.0
+*******************
+______________________________________
+configurar telefonia**************
+telephony-service
+max-dn maximo_tel
+max-ephones maximo_tel
+ip source-add ip.1 port 1-2000
+auto asing 1 to 2  hasta cuantos telefonos enumerar
+
+____________________________________________________
+asignar extensiones a los telefo
+ephone-dn 1
+number #
