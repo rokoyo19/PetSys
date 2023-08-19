@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Registro - Ángeles de Cuatro Patas</title>
   <meta charset="UTF-8">
+  <title>Registro - Ángeles de Cuatro Patas</title>
   <style>
     body {
       background-color: #064276;
@@ -56,10 +56,52 @@
       cursor: pointer;
     }
   </style>
+  <script>
+    function validarContrasena() {
+      const contrasenaInput = document.getElementById("contrasena");
+      const contrasenaValue = contrasenaInput.value;
+      
+      // Verificar la longitud mínima de 8 caracteres
+      if (contrasenaValue.length < 8) {
+        alert("La contraseña debe tener al menos 8 caracteres.");
+        return false;
+      }
+
+      // Verificar al menos un carácter numérico
+      if (!/\d/.test(contrasenaValue)) {
+        alert("La contraseña debe contener al menos un carácter numérico.");
+        return false;
+      }
+
+      // Verificar al menos un carácter especial
+      const caracteresEspeciales = /[#*@\$&]/;
+      if (!caracteresEspeciales.test(contrasenaValue)) {
+        alert("La contraseña debe contener al menos uno de los siguientes caracteres especiales: #, *, @, $, &");
+        return false;
+      }
+
+      // Verificar al menos un carácter alfabético
+      if (!/[a-zA-Z]/.test(contrasenaValue)) {
+        alert("La contraseña debe contener al menos un carácter alfabético.");
+        return false;
+      }
+
+      // Verificar que las contraseñas sean iguales
+      const confirmarContrasenaInput = document.getElementById("confirmar-contrasena");
+      const confirmarContrasenaValue = confirmarContrasenaInput.value;
+      
+      if (contrasenaValue !== confirmarContrasenaValue) {
+        alert("Las contraseñas no coinciden. Por favor, confirma la contraseña correctamente.");
+        return false;
+      }
+
+      return true;
+    }
+  </script>
 </head>
 <body>
   <div class="container">
-    <form action="registro.php" method="POST">
+    <form action="registro.php" method="POST" onsubmit="return validarContrasena();">
       <div class="form-group">
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" name="nombre" required>
@@ -88,7 +130,10 @@
         <input type="submit" value="Registrarse">
       </div>
     </form>
-    <a href="login.html"><img src="https://scontent-bog1-1.xx.fbcdn.net/v/t39.30808-6/355294465_1499894990754343_7605562006435203297_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=730e14&_nc_ohc=LYG3186tWmQAX_hGLfg&_nc_ht=scontent-bog1-1.xx&oh=00_AfCgp8lsoxux9hIEovXeR78wIdmYE0VfwaQns--MiCAKmw&oe=64957837" alt="Redireccionar a Login" class="corner-image"></a>
+    <a href="login.html">
+      <img src="https://scontent-bog1-1.xx.fbcdn.net/v/t39.30808-6/355294465_1499894990754343_7605562006435203297_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=730e14&_nc_ohc=LYG3186tWmQAX_hGLfg&_nc_ht=scontent-bog1-1.xx&oh=00_AfCgp8lsoxux9hIEovXeR78wIdmYE0VfwaQns--MiCAKmw&oe=64957837"
+      alt="Redireccionar a Login" class="corner-image">
+    </a>
   </div>
 </body>
 </html>

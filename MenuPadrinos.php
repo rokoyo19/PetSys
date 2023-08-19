@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu</title>
+    <title>Menu padrinos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <style>
         body {
@@ -27,18 +27,19 @@
             // Obtener el valor del atributo "llave" del URL y decodificarlo
             $llave = urldecode($_GET['llave']) ?? '';
             
-            // Generar el enlace a "CATALOGO.php" con el valor de "llave" en el URL
-            $enlaceCatalogo = "CATALOGO.php?llave=$llave";
-            $enlaceCancelarAdopcion = "CancelarAdopcion.php?llave=$llave";
-            $enlaceMenuPadrinos = "MenuPadrinos.php?llave=$llave";  // Nuevo enlace agregado
+            // Generar el enlace a "Cancelar Apadrinamientos" con el valor de "llave" en el URL
+            $enlaceCancelarApadrinamiento = "CancelarApadrinamiento.php?llave=$llave";
+            $enlacePagoPadrinos = "PagoPadrinos.php?llave=$llave";
+            $enlaceVisitaPadrinos = "VisitaPadrinos.php?llave=$llave";
         ?>
-        <a href="<?php echo $enlaceCatalogo; ?>" class="btn btn-primary btn-lg">Catálogo</a>
+        <a href="<?php echo $enlaceCancelarApadrinamiento; ?>" class="btn btn-primary btn-lg">Cancelar Apadrinamientos</a>
     </div>
     <div class="d-flex justify-content-center">
-        <a href="<?php echo $enlaceCancelarAdopcion; ?>" class="btn btn-primary btn-lg">Cancelar Adopciones</a>
+        <a href="<?php echo $enlacePagoPadrinos; ?>" class="btn btn-primary btn-lg">Pago Padrinos</a>
     </div>
     <div class="d-flex justify-content-center">
-        <a href="<?php echo $enlaceMenuPadrinos; ?>" class="btn btn-primary btn-lg">Menú Padrinos</a>  <!-- Cambio de enlace y texto del botón -->
+        
+        <a href="<?php echo $enlaceVisitaPadrinos; ?>" class="btn btn-primary btn-lg">Visita Padrinos</a>
     </div>
 </body>
 </html>
