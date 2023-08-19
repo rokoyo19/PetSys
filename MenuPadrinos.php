@@ -30,7 +30,7 @@
             // Generar el enlace a "Cancelar Apadrinamientos" con el valor de "llave" en el URL
             $enlaceCancelarApadrinamiento = "CancelarApadrinamiento.php?llave=$llave";
             $enlacePagoPadrinos = "PagoPadrinos.php?llave=$llave";
-            $enlaceVisitaPadrinos = "VisitaPadrinos.php?llave=$llave";
+            $enlaceVisitaPadrinos = "VISITA_PADRINO.php?llave=$llave";
         ?>
         <a href="<?php echo $enlaceCancelarApadrinamiento; ?>" class="btn btn-primary btn-lg">Cancelar Apadrinamientos</a>
     </div>
