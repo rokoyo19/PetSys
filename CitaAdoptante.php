@@ -6,59 +6,15 @@
     <title>Agende su cita</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <style>
-        body {
-            background-color: #064276;
-        }
-        h2 {
-            color: #FFFFFF; /* Color blanco */
-            text-align: center; /* Centrado horizontal */
-        }
-        .date {
-            color: #FFFFFF; /* Color blanco */
-            text-align: left; /* Alineado a la izquierda */
-            margin-top: 10px; /* Espacio superior */
-            margin-bottom: 10px; /* Espacio inferior */
-            margin-left: 20px; /* Margen izquierdo */
-        }
-        .button-container {
-            margin-top: 10px; /* Espacio superior */
-            display: flex;
-            align-items: center; /* Centrado vertical */
-            margin-left: 20px; /* Margen izquierdo */
-        }
-        .accept-button {
-            background-color: #00FF00; /* Color verde */
-            color: #000000; /* Color negro */
-            padding: 10px 20px; /* Espaciado interno */
-            margin-right: 10px; /* Espacio derecho */
-            margin-left: 10px; /* espacio izquierdo*/
-        }
-        .reject-button {
-            background-color: #FF0000; /* Color rojo */
-            color: #FFFFFF; /* Color blanco */
-            padding: 10px 20px; /* Espaciado interno */
-        }
-        .agendar-button{
-            background-color: #FFFFFF; 
-            color: #000000; 
-            padding: 10px 20px; /* Espaciado interno */
-
-        }
-        .alert{
-            color: #FFFFFF; /* Color blanco */
-            text-align: center; /* Centrado horizontal */
-        }
-        .white_text{
-            color: #FFFFFF; /* Color blanco */
-            margin-left: 40px; /* espacio izquierdo*/
-        }
-        .Subtitle{
-            color: #3DB3F5; /* Color blanco */
-            margin-left: 20px; /* espacio izquierdo*/
-        }
-        .texto-blanco {
-            color: #FFFFFF;
-        }
+        body{background-color:#064276;}h2{color:#FFFFFF;text-align:center;}.text-white{color:#FFFFFF;}
+        .date{color:#FFFFFF;text-align:left;margin-top:10px;margin-bottom:10px;margin-left:20px;}
+        .button-container{margin-top:10px;display:flex;align-items:center;margin-left:20px;}
+        .accept-button{background-color:#00FF00;color:#000000;padding:10px 20px;margin-right:10px;margin-left:10px;}
+        .reject-button{background-color:#FF0000;color:#FFFFFF;padding:10px 20px;}
+        .agendar-button{background-color:#FFFFFF;color:#000000;padding:10px 20px;}
+        .alert{color:#FFFFFF;text-align:center;}
+        .white_text{color:#FFFFFF;margin-left:40px;}
+        .Subtitle{color:#3DB3F5;margin-left:20px;}
     </style>
 </head>
 <body>
@@ -70,7 +26,6 @@
                     <strong>Angeles de cuatro patas</strong>
                 </div>
                 <?php
-                    // Obtener el valor del atributo "llave" del URL y decodificarlo
                     $llave = urldecode($_GET['llave']) ?? '';
                 ?>
                 <a href="MenuUsuarios.php?llave=<?php echo urlencode($llave); ?>">
@@ -87,143 +42,113 @@
     <table class="table table-striped table-bordered">
         <thead class="table-dark">
             <tr>
-                <th class="texto-blanco">Fecha de Cita</th>
-                <th class="texto-blanco">Aceptar Cita</th>
-                <th class="texto-blanco">Rechazar Cita</th>
-                <th class="texto-blanco">Solicitar Fecha Cita</th>
-                <th class="texto-blanco">Agendar</th>
-
+                <th class="text-white">Fecha de Cita</th>
+                <th class="text-white">Aceptar Cita</th>
+                <th class="text-white">Rechazar Cita</th>
+                <th class="text-white">Solicitar Fecha Cita</th>
+                <th class="text-white">Agendar</th>
             </tr>
         </thead>
         <tbody>
             <?php
-            // Realizar la conexión a la base de datos
-            $servername = 'localhost';
-            $username = 'root';
-            $password = '';
-            $dbname = 'appmascotas';
-
-            // Crear la conexión
-            $conn = new mysqli($servername, $username, $password, $dbname);
-
-            // Verificar la conexión
-            if ($conn->connect_error) {
-                die('Error de conexión: ' . $conn->connect_error);
-            }
-
-            // Procesar el formulario para aceptar, rechazar o cancelar citas
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                $idmascota = $_POST['idmascota'];
-                $correo = $_POST['correo'];
-                $estado = $_POST['estado'];
-
-                // Actualizar la fecha_cita a NULL si el estado es "rechazada"
-                if ($estado === "rechazada") {
-                    $sql_update = "UPDATE adopciones SET fecha_cita = NULL, estado = 'sin aceptar' WHERE idmascota = $idmascota AND correo = '$correo'";
-                    if ($conn->query($sql_update) === TRUE) {
-                        echo '<div class="alert alert-success text-black" role="alert">Cita rechazada exitosamente.</div>';
-
-                    } else {
-                        echo '<div class="alert alert-danger" role="alert">Error al rechazar la cita: ' . $conn->error . '</div>';
-                    }
-                } elseif ($estado === "aceptada") {
-                    
-                    $sql_update = "UPDATE adopciones SET estado = 'aceptada' WHERE idmascota = $idmascota AND correo = '$correo'";
-                    if ($conn->query($sql_update) === TRUE) {
-                        echo '<div class="alert alert-success text-black" role="alert">Cita aceptada exitosamente.</div>';
-                    } else {
-                        echo '<div class="alert alert-danger" role="alert">Error al aceptar la cita: ' . $conn->error . '</div>';
-                    }
-                } 
-            }
-
-            // Consulta SQL para obtener las citas por aceptar o rechazar
-            $sql = "SELECT * FROM adopciones WHERE correo = '$llave' AND fecha_cita IS NOT NULL AND estado = 'sin aceptar' ORDER BY fecha_cita ASC";
-
-            // Ejecutar la consulta
-            $result = $conn->query($sql);
-
-            // Verificar si hay datos para mostrar
-            if ($result->num_rows > 0) {
-                // Recorrer los resultados y mostrarlos en la tabla
-                while ($row = $result->fetch_assoc()) {
-                    echo '<tr>';
-                    echo '<td class="text-white">' . $row['fecha_cita'] . '</td>';
-                    echo '<td>';
-                    echo '<form action="' . $_SERVER['PHP_SELF'] . '?llave=' . urlencode($llave) . '" method="post">';
-                    echo '<input type="hidden" name="idmascota" value="' . $row['idmascota'] . '">';
-                    echo '<input type="hidden" name="correo" value="' . $llave . '">';
-                    echo '<input type="hidden" name="estado" value="aceptada">';
-                    echo '<button type="submit" class="accept-button">Aceptar cita</button>';
-                    echo '</form>';
-                    echo '</td>';
-                    echo '<td>';
-                    echo '<form action="' . $_SERVER['PHP_SELF'] . '?llave=' . urlencode($llave) . '" method="post">';
-                    echo '<input type="hidden" name="idmascota" value="' . $row['idmascota'] . '">';
-                    echo '<input type="hidden" name="correo" value="' . $llave . '">';
-                    echo '<input type="hidden" name="estado" value="rechazada">';
-                    echo '<button type="submit" class="reject-button">Rechazar cita</button>';
-                    echo '</form>';
-                    echo '</td>';
-                    echo '<td>';
-                    echo '<form action="' . $_SERVER['PHP_SELF'] . '?llave=' . urlencode($llave) . '" method="post">';
-                    echo '<input type="hidden" name="idmascota" value="' . $row['idmascota'] . '">';
-                    echo '<input type="hidden" name="correo" value="' . $llave . '">';
-                    echo '<input type="hidden" name="estado" value="rechazada">';
-                    echo '<input type="date">';
-                    echo '</form>';
-                    echo '</td>';
-                    echo '<td>';
-                    echo '<form action="' . $_SERVER['PHP_SELF'] . '?llave=' . urlencode($llave) . '" method="post">';
-                    echo '<input type="hidden" name="idmascota" value="' . $row['idmascota'] . '">';
-                    echo '<input type="hidden" name="correo" value="' . $llave . '">';
-                    echo '<input type="hidden" name="estado" value="rechazada">';
-                    echo '<button type="submit" class="agendar-button">Agendar</button>';
-                    echo '</form>';
-                    echo '</td>';
-                    echo '</tr>';
+                $servername = 'localhost';
+                $username = 'root';
+                $password = '';
+                $dbname = 'appmascotas';
+                $conn = new mysqli($servername, $username, $password, $dbname);
+                if ($conn->connect_error) {
+                    die('Error de conexión: ' . $conn->connect_error);
                 }
-            } else {
-                echo '<tr><td colspan="3" class="texto-blanco">No hay citas por confirmar.</td></tr>';
-            }
-
-            // Cerrar la conexión
-            $conn->close();
+                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    $idmascota = $_POST['idmascota'];
+                    $correo = $_POST['correo'];
+                    $estado = $_POST['estado'];
+                    $nueva_fecha = $_POST['nueva_fecha'];
+                    if ($estado === "rechazada") {
+                        $sql_update = "UPDATE adopciones SET fecha_cita = NULL, estado = 'sin aceptar' WHERE idmascota = $idmascota AND correo = '$correo'";
+                        if ($conn->query($sql_update) === TRUE) {
+                            echo '<div class="alert alert-success text-black" role="alert">Cita rechazada exitosamente.</div>';
+                        } else {
+                            echo '<div class="alert alert-danger" role="alert">Error al rechazar la cita: ' . $conn->error . '</div>';
+                        }
+                    } elseif ($estado === "aceptada") {
+                        $sql_update = "UPDATE adopciones SET estado = 'aceptada' WHERE idmascota = $idmascota AND correo = '$correo'";
+                        if ($conn->query($sql_update) === TRUE) {
+                            echo '<div class="alert alert-success text-black" role="alert">Cita aceptada exitosamente.</div>';
+                        } else {
+                            echo '<div class="alert alert-danger" role="alert">Error al aceptar la cita: ' . $conn->error . '</div>';
+                        }
+                    } elseif ($estado=== "reagendar"){
+                        $nueva_fecha_formatted = date('Y-m-d', strtotime($nueva_fecha));
+                        $sql_update = "UPDATE adopciones SET fecha_cita = '$nueva_fecha_formatted', estado = 'reagendar' WHERE idmascota = $idmascota AND correo = '$correo'";
+                        if ($conn->query($sql_update) === TRUE) {
+                            echo '<div class="alert alert-success text-black" role="alert">Cita reagendada exitosamente.</div>';
+                        } else {
+                            echo '<div class="alert alert-danger" role="alert">Error al reagendar la cita: ' . $conn->error . '</div>';
+                        }
+                    }
+                }
+                $sql = "SELECT * FROM adopciones WHERE correo = '$llave' AND fecha_cita IS NOT NULL AND estado = 'sin aceptar' ORDER BY fecha_cita ASC";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo '<tr>';
+                        echo '<td class="text-white">' . $row['fecha_cita'] . '</td>';
+                        echo '<td>';
+                        echo '<form action="' . $_SERVER['PHP_SELF'] . '?llave=' . urlencode($llave) . '" method="post">';
+                        echo '<input type="hidden" name="idmascota" value="' . $row['idmascota'] . '">';
+                        echo '<input type="hidden" name="correo" value="' . $llave . '">';
+                        echo '<input type="hidden" name="estado" value="aceptada">';
+                        echo '<button type="submit" class="accept-button">Aceptar cita</button>';
+                        echo '</form>';
+                        echo '</td>';
+                        echo '<td>';
+                        echo '<form action="' . $_SERVER['PHP_SELF'] . '?llave=' . urlencode($llave) . '" method="post">';
+                        echo '<input type="hidden" name="idmascota" value="' . $row['idmascota'] . '">';
+                        echo '<input type="hidden" name="correo" value="' . $llave . '">';
+                        echo '<input type="hidden" name="estado" value="rechazada">';
+                        echo '<button type="submit" class="reject-button">Rechazar cita</button>';
+                        echo '</form>';
+                        echo '</td>';
+                        echo '<td>';
+                        echo '<form action="' . $_SERVER['PHP_SELF'] . '?llave=' . urlencode($llave) . '" method="post">';
+                        echo '<input type="hidden" name="idmascota" value="' . $row['idmascota'] . '">';
+                        echo '<input type="hidden" name="correo" value="' . $llave . '">';
+                        echo '<input type="hidden" name="estado" value="reagendar"> <!-- Cambiado a "reagendar" -->';
+                        echo '<input type="date" name="nueva_fecha" required>';
+                        echo '<button type="submit" class="agendar-button">Reagendar</button>';
+                        echo '</form>';
+                        echo '</td>';
+                        echo '</tr>';
+                    }
+                } else {
+                    echo '<tr><td colspan="3" class="text-white">No hay citas por confirmar.</td></tr>';
+                }
+                $conn->close();
             ?>
         </tbody>
     </table>
-
-    <!-- Texto y lista de citas aceptadas -->
-    <div class="Subtitle">
-        Citas aceptadas:
-    </div>
+    <div class="Subtitle">Citas aceptadas:</div>
     <div id="citas-aceptadas" class="white_text">
         <?php
-        // Realizar la conexión a la base de datos
-        $conn = new mysqli($servername, $username, $password, $dbname);
-        if ($conn->connect_error) {
-            die('Error de conexión: ' . $conn->connect_error);
-        }
-
-        // Consulta SQL para obtener las citas aceptadas
-        $sql_aceptadas = "SELECT * FROM adopciones WHERE correo = '$llave' AND fecha_cita IS NOT NULL AND estado = 'aceptada' ORDER BY fecha_cita ASC";
-        $result_aceptadas = $conn->query($sql_aceptadas);
-
-        if ($result_aceptadas->num_rows > 0) {
-            echo 'Cita programada para el ';
-            while ($row_aceptada = $result_aceptadas->fetch_assoc()) {
-                echo $row_aceptada['fecha_cita'] . ', ';
+            $conn = new mysqli($servername, $username, $password, $dbname);
+            if ($conn->connect_error) {
+                die('Error de conexión: ' . $conn->connect_error);
             }
-        } else {
-            echo 'No hay citas aceptadas.';
-        }
-
-        $conn->close();
+            $sql_aceptadas = "SELECT * FROM adopciones WHERE correo = '$llave' AND fecha_cita IS NOT NULL AND estado != 'sin aceptar' ORDER BY fecha_cita ASC";
+            $result_aceptadas = $conn->query($sql_aceptadas);
+            if ($result_aceptadas->num_rows > 0) {
+                echo 'Cita programada para el ';
+                while ($row_aceptada = $result_aceptadas->fetch_assoc()) {
+                    echo $row_aceptada['fecha_cita'] . ', ';
+                }
+            } else {
+                echo 'No hay citas aceptadas.';
+            }
+            $conn->close();
         ?>
     </div>
-
     <script>
-        // Agregar evento de clic al botón "Aceptar cita" y "Rechazar cita"
         const acceptButtons = document.querySelectorAll('.accept-button');
         acceptButtons.forEach(button => {
             button.addEventListener('click', () => {
@@ -231,7 +156,6 @@
                 form.submit();
             });
         });
-
         const rejectButtons = document.querySelectorAll('.reject-button');
         rejectButtons.forEach(button => {
             button.addEventListener('click', () => {
@@ -246,10 +170,6 @@
                 form.submit();
             });
         });
-
-
-     
     </script>
-
 </body>
 </html>

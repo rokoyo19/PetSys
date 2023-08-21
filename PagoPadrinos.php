@@ -55,12 +55,44 @@
     </header>
     
     <div class="label-box">
-        <label>Seleccione adopción</label>
+        <label>Seleccione apadrinamiento</label>
         <span>
-            <select class="form-select">
-            <option>Perro</option>
-            <option>Perro2</option>
-            <option>Perro3</option>
+        <select class="form-select">
+                <?php
+                // Obtener el valor del atributo "llave" del URL y decodificarlo
+                $llave = urldecode($_GET['llave']) ?? '';
+
+                // Conexión a la base de datos
+                $servername = 'localhost';
+                $username = 'root';
+                $password = '';
+                $dbname = 'appmascotas';
+
+                $conn = new mysqli($servername, $username, $password, $dbname);
+
+                if ($conn->connect_error) {
+                    die('Error de conexión: ' . $conn->connect_error);
+                }
+
+                // Obtener el correo del usuario desde la llave en el URL
+                $correoUsuario = $llave;
+
+                // Consulta para obtener los nombres de las mascotas apadrinadas por el usuario
+                $sql_mascotas = "SELECT mascotas.nombre 
+                                 FROM mascotas 
+                                 INNER JOIN padrinos ON mascotas.id = padrinos.idmascota 
+                                 WHERE padrinos.correo = '$correoUsuario'";
+
+                $result_mascotas = $conn->query($sql_mascotas);
+
+                if ($result_mascotas->num_rows > 0) {
+                    while ($row_mascota = $result_mascotas->fetch_assoc()) {
+                        echo '<option>' . $row_mascota['nombre'] . '</option>';
+                    }
+                }
+
+                $conn->close();
+                ?>
             </select>
         </span>
     </div>
