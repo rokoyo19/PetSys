@@ -44,8 +44,17 @@
         </div>
     </header>
 
-    <div class="container mt-4">
-        <h3 class="white-text">Datos padrinos y adoptantes</h3>
+    <div>
+                <style>
+                    h1 {
+                        text-align: center;
+                        color: white;
+                        font-weight: bold;
+                        padding-top: 30px;
+                    }
+                </style>
+                <h1>DATOS PADRINOS Y ADOPTANTES</h1>
+            </div>
 
         <table class="table table-striped table-bordered mt-3">
             <thead class="table-dark">
@@ -60,7 +69,8 @@
                     <th>Ingresos</th>
                     <th>Mascota</th>
                     <th>Rol</th>
-                    <th></th> <!-- Columna para el botón -->
+                    <th>Documento</th>
+                    
                 </tr>
             </thead>
             <tbody>

@@ -90,7 +90,7 @@
                             // Verificar si la fecha de la cita es nula o si ya ha pasado el día de la cita
                             $fechaCita = $row['fecha_cita'];
                             if (empty($fechaCita) || strtotime($fechaCita) < time()) {
-                                $fechaCita = 'null';
+                                $fechaCita = 'Sin agendar';
                             }
 
                             echo '<tr>';
