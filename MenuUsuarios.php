@@ -8,6 +8,46 @@
     <style>
         body {
             background-color: #064276;
+            color: white;
+        }
+
+        .logo {
+            max-width: 100px;
+        }
+
+        .menu-container {
+            max-width: 300px;
+            margin: 0 auto;
+            margin-top: 50px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+        }
+
+        .menu-link {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px 20px;
+            text-align: center;
+            background-color: #009e0f;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-link:hover {
+            background-color: #00850e;
+        }
+
+        .corner-image {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            width: 100px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -21,24 +61,21 @@
                 </div>
             </div>
         </div>
-    </header>
-    <div class="d-flex justify-content-center">
+    </header>  
+    <div class="menu-container">
         <?php
             // Obtener el valor del atributo "llave" del URL y decodificarlo
             $llave = urldecode($_GET['llave']) ?? '';
             
             // Generar el enlace a "CATALOGO.php" con el valor de "llave" en el URL
             $enlaceCatalogo = "CATALOGO.php?llave=$llave";
-            $enlaceCancelarAdopcion = "CancelarAdopcion.php?llave=$llave";
+            $enlaceCancelarAdopcion = "MenuAdoptante.php?llave=$llave";
             $enlaceMenuPadrinos = "MenuPadrinos.php?llave=$llave";  // Nuevo enlace agregado
         ?>
-        <a href="<?php echo $enlaceCatalogo; ?>" class="btn btn-primary btn-lg">Catálogo</a>
-    </div>
-    <div class="d-flex justify-content-center">
-        <a href="<?php echo $enlaceCancelarAdopcion; ?>" class="btn btn-primary btn-lg">Cancelar Adopciones</a>
-    </div>
-    <div class="d-flex justify-content-center">
-        <a href="<?php echo $enlaceMenuPadrinos; ?>" class="btn btn-primary btn-lg">Menú Padrinos</a>  <!-- Cambio de enlace y texto del botón -->
+        <a href="<?php echo $enlaceCatalogo; ?>" class="menu-link">Catálogo</a>
+        <a href="<?php echo $enlaceCancelarAdopcion; ?>" class="menu-link">Menú Adopciones</a>
+        <a href="<?php echo $enlaceMenuPadrinos; ?>" class="menu-link">Menú Padrinos</a>
+        <a href="login.html" class="menu-link">Cerrar Sesión</a>
     </div>
 </body>
 </html>

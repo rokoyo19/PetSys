@@ -34,7 +34,11 @@
         .menu-container {
             max-width: 300px;
             margin: 0 auto;
-            margin-top: 20px;
+            margin-top: 50px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
         }
 
         .menu-link {
@@ -53,16 +57,38 @@
         .menu-link:hover {
             background-color: #00850e;
         }
+
+        .d-flex.justify-content-center {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px; /* Espacio entre los botones */
+        }
+
+        .btn-primary {
+            background-color: #009e0f;
+            color: white;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%; /* Botones del mismo ancho */
+        }
+
+        .btn-primary:hover {
+            background-color: #00850e;
+        }
     </style>
 </head>
 <body>
     <header>
         <div class="navbar navbar-dark bg-dark shadow-sm">
             <div class="container">
-                <a href="#" class="navbar-brand d-flex align-items-center">
+                <div href="#" class="navbar-brand d-flex align-items-center">
                     <img src="img/logo.png" width="50" height="50" alt="">
                     <strong>Angeles de cuatro patas</strong>
-                </a>
+                </div>
                 <?php
                     // Obtener el valor del atributo "llave" del URL y decodificarlo
                     $llave = urldecode($_GET['llave']) ?? '';
@@ -82,14 +108,16 @@
             // Obtener el valor del atributo "llave" del URL y decodificarlo
             $llave = urldecode($_GET['llave']) ?? '';
             
-            // Generar los enlaces con el valor de "llave" en el URL
-            $enlaceCancelarApadrinamiento = "CancelarApadrinamiento.php?llave=$llave";
-            $enlacePagoPadrinos = "PagoPadrinos.php?llave=$llave";
-            $enlaceVisitaPadrinos = "VISITA_PADRINO.php?llave=$llave";
+            // Generar el enlace a "Cancelar Apadrinamientos" con el valor de "llave" en el URL
+            $enlaceCancelarAdopcion = "CancelarAdopcion.php?llave=$llave";
+            $enlaceCitaAdoptante = "citaAdoptante.php?llave=$llave";
         ?>
-        <a href="<?php echo $enlaceCancelarApadrinamiento; ?>" class="menu-link">Cancelar Apadrinamientos</a>
-        <a href="<?php echo $enlacePagoPadrinos; ?>" class="menu-link">Pago Padrinos</a>
-        <a href="<?php echo $enlaceVisitaPadrinos; ?>" class="menu-link">Visita Padrinos</a>
+        <div class="d-flex justify-content-center">
+            <a href="<?php echo $enlaceCancelarAdopcion; ?>" class="btn btn-primary btn-lg">Cancelar Adopción</a>
+        </div>
+        <div class="d-flex justify-content-center">
+            <a href="<?php echo $enlaceCitaAdoptante; ?>" class="btn btn-primary btn-lg">Ver Citas</a>
+        </div>
     </div>
 </body>
 </html>

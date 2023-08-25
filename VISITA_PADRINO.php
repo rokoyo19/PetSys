@@ -9,6 +9,10 @@
     <style>
         body {
             background-color: #064276;
+            color: #FFFFFF;
+        }
+        .col-md-6{
+            margin-top: 50px;
         }
     </style>
 </head>
@@ -92,6 +96,7 @@
                 </form>
             </div>
             <div class="col-md-6">
+                <h1>Visitas agendadas</h1>
                 <table class="table table-striped table-bordered">
                     <thead class="table-dark">
                         <tr>
